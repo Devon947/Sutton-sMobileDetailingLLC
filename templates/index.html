@@ -1,19 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>{{ title }}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sutton's Mobile Detailing</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #000000;
+            overflow: hidden;
+        }
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(to bottom right, #00cfff, #0080ff);
+            animation: float 15s infinite;
+        }
+        .bubble:nth-child(1) { width: 60px; height: 60px; left: 25%; animation-duration: 18s; animation-delay: 2s; }
+        .bubble:nth-child(2) { width: 40px; height: 40px; left: 50%; animation-duration: 12s; animation-delay: 4s; }
+        .bubble:nth-child(3) { width: 80px; height: 80px; left: 75%; animation-duration: 20s; animation-delay: 6s; }
+        .bubble:nth-child(4) { width: 50px; height: 50px; left: 10%; animation-duration: 16s; animation-delay: 8s; }
+        .bubble:nth-child(5) { width: 90px; height: 90px; left: 85%; animation-duration: 22s; animation-delay: 10s; }
+        .bubble:nth-child(6) { width: 70px; height: 70px; left: 15%; animation-duration: 18s; animation-delay: 3s; }
+        .bubble:nth-child(7) { width: 50px; height: 50px; left: 30%; animation-duration: 14s; animation-delay: 5s; }
+        .bubble:nth-child(8) { width: 100px; height: 100px; left: 65%; animation-duration: 22s; animation-delay: 7s; }
+        .bubble:nth-child(9) { width: 30px; height: 30px; left: 40%; animation-duration: 16s; animation-delay: 9s; }
+        .bubble:nth-child(10) { width: 80px; height: 80px; left: 70%; animation-duration: 19s; animation-delay: 11s; }
+        .bubble:nth-child(11) { width: 60px; height: 60px; left: 20%; animation-duration: 21s; animation-delay: 13s; }
+        .bubble:nth-child(12) { width: 40px; height: 40px; left: 35%; animation-duration: 17s; animation-delay: 15s; }
+        .bubble:nth-child(13) { width: 70px; height: 70px; left: 55%; animation-duration: 20s; animation-delay: 17s; }
+        .bubble:nth-child(14) { width: 50px; height: 50px; left: 80%; animation-duration: 18s; animation-delay: 19s; }
+        .bubble:nth-child(15) { width: 90px; height: 90px; left: 90%; animation-duration: 22s; animation-delay: 21s; }
+        @keyframes float {
+            0% { transform: translateY(100vh); }
+            100% { transform: translateY(-100vh); }
+        }
+        .business-card {
+            position: relative;
+            width: 90%; /* Use a percentage width for responsiveness */
+            max-width: 400px; /* Set a max width */
+            height: auto; /* Allow height to adjust based on content */
+            padding: 20px; /* Adjusted padding */
+            background: linear-gradient(to bottom right, #00cfff, #0080ff); /* Matching bubbles */
+            border-radius: 15px; /* Rounded corners */
+            border: 1px solid #007acc; /* Subtle border */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            z-index: 1;
+            transition: transform 0.2s; /* Hover effect */
+        }
+        .business-card:hover {
+            transform: scale(1.05); /* Hover effect */
+        }
+        .business-card img {
+            width: 50%; /* Adjusted size for responsiveness */
+            height: auto;
+            margin-bottom: 15px; /* Adjusted margin */
+        }
+        .business-card h1 {
+            margin: 0;
+            font-size: 6vw; /* Use viewport width for responsiveness */
+            color: #ffffff; /* Updated text color */
+            font-weight: 700; /* Bold font */
+        }
+        .business-card h2 {
+            margin: 10px 0;
+            font-size: 5vw; /* Use viewport width for responsiveness */
+            color: #e0e0e0; /* Updated text color */
+            font-weight: 400; /* Regular font */
+        }
+        .business-card p {
+            margin: 10px 0;
+            font-size: 4vw; /* Use viewport width for responsiveness */
+            color: #c0c0c0; /* Updated text color */
+            font-weight: 400; /* Regular font */
+        }
+        .contact-icons {
+            display: flex;
+            flex-direction: column; /* Stack vertically */
+            align-items: center; /* Center align */
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .contact-icons i {
+            color: #ffffff;
+            font-size: 4vw; /* Use viewport width for responsiveness */
+        }
 
+        @media (max-width: 600px) {
+            .business-card {
+                padding: 15px;
+            }
+            .business-card h1 {
+                font-size: 7vw;
+            }
+            .business-card h2 {
+                font-size: 6vw;
+            }
+            .business-card p {
+                font-size: 5vw;
+            }
+            .contact-icons i {
+                font-size: 5vw;
+            }
+        }
+    </style>
+    <!-- Font Awesome for icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
 <body>
-    <div class="App">
-        <header class="App-header">
-            <img src="{{ url_for('static', filename='Octocat.png') }}" class="App-logo" alt="logo" />
-            <p>
-                GitHub Codespaces <span class="heart">♥️</span> Flask
-            </p>
-            <p class="small">
-                Edit <code>templates/index.html</code> and refresh to see your changes!
-            </p>
-        </header>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="business-card">
+        <img src="static/suttons_logo.png" alt="Sutton's Mobile Detailing LLC">
+        <h1>Cory Sutton</h1>
+        <h2>Sutton’s Mobile Detailing LLC</h2>
+        <div class="contact-icons">
+            <p><i class="fas fa-envelope"></i> SuttonsMobileDetailing3@gmail.com</p>
+            <p><i class="fas fa-phone"></i> 252-801-1733</p>
+        </div>
     </div>
 </body>
-
 </html>
